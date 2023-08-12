@@ -1,14 +1,17 @@
 import React from 'react'
-import App from './App.tsx'
-import Home from './view/Home'
-import Search from './view/Search'
-import './index.css'
 import * as ReactDOM from "react-dom/client";
-
+import { QueryClient } from '@tanstack/react-query'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
+
+import App from './App.tsx'
+import { Home, homeLoader } from './routes/Home'
+import Search from './routes/Search'
+import './index.css'
+
+const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
@@ -16,7 +19,8 @@ const router = createBrowserRouter([
     children: [
       {
         path: "/",
-        element: <Home />
+        element: <Home />,
+        loader: homeLoader(queryClient)
       },
       {
         path: "/busca",
