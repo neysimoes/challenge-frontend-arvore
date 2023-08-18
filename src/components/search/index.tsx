@@ -9,9 +9,9 @@ import { redirect } from "react-router-dom"
 import { Icon, InputSearch, SearchForm, SearchContainer,
   SearchResultItem,
   SearchResultList } from './styles'
-import { SearchProps } from './types'
+import type { SearchProps, booksApiResponse, books } from './types'
 
-const listResults = (results) => results.map((item, index) => (<SearchResultItem key={index} onClick={() => redirect(`/busca?q=${item.volumeInfo.title}`)}>{item.volumeInfo.title}</SearchResultItem>))
+const listResults = (results: books) => results.map((item, index) => (<SearchResultItem key={index} onClick={() => redirect(`/busca?q=${item.volumeInfo.title}`)}>{item.volumeInfo.title}</SearchResultItem>))
 
 const Search: React.FC<SearchProps> = () => {
   const queryClient = useQueryClient()
@@ -20,13 +20,13 @@ const Search: React.FC<SearchProps> = () => {
   const [ isSearchOpen, setSearchOpen ] = useState(false)
   const [ searchResult, setSearchResult ] = useState([])
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event: Event) => {
     event.preventDefault()
     redirect(`/busca?q=${searchValue}`)
   }
 
-  const handleSearchInputChange = async ({ target }) => {
-    const { value } = target;
+  const handleSearchInputChange = async ({ target }: InputEvent) => {
+    const { value } = target as HTMLInputElement;
     setSearchValue(value)
     const query = getBooksQuery({ query: value, limit: 5 })
 
@@ -34,7 +34,7 @@ const Search: React.FC<SearchProps> = () => {
       queryClient.getQueryData(query.queryKey) ??
       (await queryClient.fetchQuery(query)))
 
-    const { items } = await response;
+    const { items } = await response as booksApiResponse;
 
     setSearchOpen(items?.length)
 
