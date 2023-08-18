@@ -1,30 +1,31 @@
 import React from 'react'
 import * as ReactDOM from "react-dom/client";
-import { QueryClient } from '@tanstack/react-query'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 import {
   createBrowserRouter,
   RouterProvider,
 } from "react-router-dom";
 
-import App from './App.tsx'
-import { Home, homeLoader } from './routes/Home'
-import Search from './routes/Search'
+import { Root, rootAction }  from './routes/Root'
+import { Home } from './routes/Home'
+import { Search, searchLoader } from './routes/Search'
 import './index.css'
 
 const queryClient = new QueryClient()
 
 const router = createBrowserRouter([
   {
-    element: <App />,
+    element: <Root />,
+    action: rootAction(queryClient),
     children: [
       {
         path: "/",
         element: <Home />,
-        loader: homeLoader(queryClient)
       },
       {
         path: "/busca",
-        element: <Search />
+        element: <Search />,
+        loader: searchLoader(queryClient)
       },
     ]
   }
@@ -32,6 +33,8 @@ const router = createBrowserRouter([
 
 ReactDOM.createRoot(document.getElementById('root')!).render(
   <React.StrictMode>
-    <RouterProvider router={router} />
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   </React.StrictMode>,
 )

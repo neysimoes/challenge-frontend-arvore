@@ -1,9 +1,9 @@
-import Footer from "./components/footer";
-import Header from "./components/header";
-import { footerAllrightsReserved, helpLink, privacyAndPolicy, termsAndUsage } from "./constants";
+import Footer from "../../components/footer";
+import Header from "../../components/header";
+import { footerAllrightsReserved, helpLink, privacyAndPolicy, termsAndUsage } from "../../constants";
 import { Outlet } from "react-router-dom";
 
-function App() {
+function Root() {
   return (
     <>
       <Header />
@@ -18,4 +18,4 @@ function App() {
   );
 }
 
-export default App;
+export default Root;
