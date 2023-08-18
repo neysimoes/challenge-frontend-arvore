@@ -11,10 +11,7 @@ import { CarouselProps } from "./types";
 
 const ArrowButtonNext = ({onClick, className}: CarouselProps) => {
   return (
-    <ArrowNext
-      className={className}
-      onClick={onClick}
-    >
+    <ArrowNext className={className} onClick={onClick}>
       <ArrowIconNext />
     </ArrowNext>
   );
@@ -36,9 +33,9 @@ const Carousel: React.ForwardRefRenderFunction<SlickSlider, CarouselProps> = (
   { children, settings, spaceBetweenItems, className, onClick },
   ref
 ) => {
- 
+
   return (
-    <SliderWrapper spaceBetweenItems={spaceBetweenItems}>
+    <SliderWrapper $spaceBetweenItems={spaceBetweenItems}>
       <SlickSlider
         ref={ref}
         {...settings}

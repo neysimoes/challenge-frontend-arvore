@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 
-export const SliderWrapper = styled.div<{ spaceBetweenItems?: string }>`
+export const SliderWrapper = styled.div<{ $spaceBetweenItems?: string }>`
   margin: 0px;
 
   .slick-slider {
@@ -9,7 +9,7 @@ export const SliderWrapper = styled.div<{ spaceBetweenItems?: string }>`
     display: block;
     box-sizing: border-box;
     margin: 0 auto;
-    
+
     -webkit-user-select: none;
     -moz-user-select: none;
     -ms-user-select: none;
@@ -81,8 +81,8 @@ export const SliderWrapper = styled.div<{ spaceBetweenItems?: string }>`
 
     height: 100%;
     min-height: 1px;
-    margin-right: ${({ spaceBetweenItems }) =>
-      spaceBetweenItems ? spaceBetweenItems : 0};
+    margin-right: ${({ $spaceBetweenItems }) =>
+      $spaceBetweenItems ? $spaceBetweenItems : 0};
   }
   [dir='rtl'] .slick-slide {
     float: right;
